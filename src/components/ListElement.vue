@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       imageName: 'https://picsum.photos/200/300',
-      productName: 'Medved',
+      productName: '123',
       brand: 'Kaysar',
       price: 0.0
     }

@@ -2,23 +2,33 @@
   <div class="box">
     <a href="https://google.com"><img class="image" :src="imgPath" alt="Item Image"/></a>
     <p>
-      {{ productName }}
+      {{ title }}
     </p>
     <p>
-      {{ price }}
+      {{ regular_price.value + " " + regular_price.currency }}
     </p>
+    <button class="button">Add To Cart</button>
   </div>
 </template>
 
 <script>
 export default {
   name: "ListElement",
+  props: {
+    item: Object
+  },
   data() {
     return {
-      imageName: 'https://picsum.photos/200/200',
-      productName: '123',
-      brand: 'Kaysar',
-      price: 0.0
+      type: this.item.type,
+      id: this.item.id,
+      sku: this.item.sku,
+      title: this.item.title,
+      regular_price: {
+        currency: this.item.regular_price.currency,
+        value: this.item.regular_price.value
+      },
+      image: this.item.image,
+      brand_id: this.item.brand_id
     }
   },
   methods: {
@@ -26,11 +36,11 @@ export default {
   },
   computed: {
     imgPath() {
-      if(!this.imageName.includes("http")) {
+      if(!this.image.includes("http")) {
         let images = require.context('../assets/', false, /\.png$/);
-        return images('./' + this.imageName + ".png");
+        return images('./' + this.image + ".png");
       }
-      return this.imageName;
+      return this.image;
     }
   }
 }
@@ -47,5 +57,18 @@ export default {
 .image {
   height: 10rem;
   width: 10rem;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 1px #333 solid;
+  text-decoration: none;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #333;
+  color: white;
 }
 </style>

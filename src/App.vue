@@ -1,25 +1,14 @@
 <template>
-<!--  <img alt="Vue logo" src="./assets/logo.png">-->
   <NavbarTop/>
-
   <router-view/>
-
-<!--  <ListElement/>-->
-<!--  <ListElement/>-->
-<!--  <BasketTable :initial-items="items" @quantity-change="updateTotal"/>-->
-<!--  {{ total }}-->
 </template>
 
 <script>
-// import ListElement from "@/components/ListElement";
-// import BasketTable from "@/components/BasketTable";
 import NavbarTop from "@/components/NavbarTop";
 
 export default {
   name: 'App',
   components: {
-    // ListElement,
-    // BasketTable,
     NavbarTop
   }
 }
@@ -42,5 +31,10 @@ body {
   margin: 1rem 2rem;
   padding: 1rem;
 }
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}
+
 
 </style>

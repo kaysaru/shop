@@ -1,6 +1,6 @@
 <template>
   <div class="topnav">
-    <img class="image" :src="indexImg" alt="logo">
+    <router-link class="logo" to="/"><img class="image" :src="indexImg" alt="logo"></router-link>
     <ul class="buttons">
       <li>
         <router-link to="/store" :class="{ active: this.store }" @click="changeActive('store')" style="margin-right: 0.3rem">Store</router-link>
@@ -19,17 +19,16 @@ export default {
     return {
       indexImg: require('@/assets/pics/logo.png'),
       basket: false,
-      store: true
+      store: false
     }
   },
   methods: {
     changeActive(active) {
-      console.log(active)
       if(active === 'store') {
         this.store = true;
         this.basket = false;
       }
-      else {
+      else if(active === 'basket') {
         this.store = false
         this.basket = true;
       }
@@ -67,6 +66,16 @@ export default {
 .topnav a.active {
   background-color: #ddd;
   color: black;
+}
+
+.topnav .logo {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.topnav .logo:hover {
+  background-color: inherit;
 }
 
 li {

@@ -63,8 +63,9 @@ export default {
 
 ul {
   list-style: none;
-  padding: 0 5rem;
+  padding: 0;
   margin: 0;
+  overflow: hidden;
 
 }
 

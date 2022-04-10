@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <div class="brands-load">
-      <textarea class="textbox" v-model="brandsJson"></textarea>
+      <textarea class="text-box" v-model="brandsJson"></textarea>
       <button @click="parseBrand">Load Brand</button>
     </div>
     <div class="items-load">
-      <textarea class="textbox" v-model="itemsJson"></textarea>
+      <textarea class="text-box" v-model="itemsJson"></textarea>
       <button @click="parseItem">Load Item</button>
     </div>
   </div>
@@ -49,7 +49,7 @@ export default {
   display: inline-block;
 }
 
-.textbox {
+.text-box {
   width: 100%;
   height: 150px;
   padding: 12px 20px;

@@ -1,5 +1,5 @@
 <template>
-  <div class="topnav">
+  <div class="top-nav">
     <router-link class="logo" to="/"><img class="image" :src="indexImg" alt="logo"></router-link>
     <ul class="buttons">
       <li>
@@ -40,7 +40,7 @@ export default {
 
 <style scoped>
 /* Add a black background color to the top navigation */
-.topnav {
+.top-nav {
   background-color: #333;
   overflow: hidden;
   width: 100%;
@@ -48,7 +48,7 @@ export default {
 }
 
 /* Style the links inside the navigation bar */
-.topnav a {
+.top-nav a {
   color: #f2f2f2;
   text-align: center;
   padding: 0.7rem 1.1rem;
@@ -57,24 +57,24 @@ export default {
   border: 1px solid #f2f2f2;
 }
 /* Change the color of links on hover */
-.topnav a:hover {
+.top-nav a:hover {
   background-color: #ddd;
   color: black;
 }
 
 /* Add a color to the active/current link */
-.topnav a.active {
+.top-nav a.active {
   background-color: #ddd;
   color: black;
 }
 
-.topnav .logo {
+.top-nav .logo {
   border: none;
   padding: 0;
   margin: 0;
 }
 
-.topnav .logo:hover {
+.top-nav .logo:hover {
   background-color: inherit;
 }
 

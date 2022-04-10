@@ -9,13 +9,14 @@
         <span class="item-total-price"> Total </span>
         <span class="item-button"> Delete </span>
       </li>
-      <li v-for="item in items" :key="item.index">
-        <span> <img class="image" :src="item.image" alt="img of item"> </span>
-        <span class="name"> {{ item.name }} </span>
-        <span class="price"> {{ item.price }}$</span>
+
+      <li v-for="item in items" :key="item.id">
+        <span> <img class="image" :src="imgPath(item)" alt="img of item"> </span>
+        <span class="name"> {{ getBrandNameById(item.brand_id) + ' | ' + item.title }} </span>
+        <span class="price"> {{ item.regular_price.value + " " + item.regular_price.currency }}</span>
         <span class="number"> <input type="number" @click="emitTotalPrice" v-model="item.quantity" min="1" style="width: 3rem"> </span>
-        <span class="item-total-price"> {{ calculatePriceOfItem(item) }} </span>
-        <span class="item-button"> <button @click="deleteItem(item.index)" class="button" name="Delete">Delete</button> </span>
+        <span class="item-total-price"> {{ (isNaN(calculatePriceOfItem(item))) ? 0.0 : calculatePriceOfItem(item).toPrecision(4) }} </span>
+        <span class="item-button"> <button @click="deleteItem(item.id)" class="button" name="Delete">Delete</button> </span>
       </li>
     </ul>
   </div>
@@ -24,21 +25,36 @@
 <script>
 export default {
   name: "BasketTable",
-  props: {
-    initialItems: Object,
-  },
   data() {
     return {
-      items: this.initialItems
+      items: this.$store.state.cart
     }
   },
   methods: {
     deleteItem(idx) {
-      idx
-      console.log(idx);
+      for(let i = 0; i < this.items.length; ++i) {
+        if(this.items[i].id === idx) {
+          this.$store.commit('removeFromCart', this.items[i]);
+        }
+      }
     },
     calculatePriceOfItem(item) {
-      return item.price * item.quantity;
+      return item.regular_price.value * item.quantity;
+    },
+    imgPath(item) {
+      if(!item.image.includes("http")) {
+        let images = require.context('../assets/', false, /\.png$/);
+        return images('./' + item.image + ".png");
+      }
+      return item.image;
+    },
+    getBrandNameById(brandId) {
+      for(let i = 0; i < this.$store.state.brands.length; ++i) {
+        if (parseInt(this.$store.state.brands[i].id) === brandId) {
+          return this.$store.state.brands[i].title;
+        }
+      }
+      return 'Unknown Brand';
     },
     emitTotalPrice() {
       this.$emit('quantity-change', this.totalPrice);
@@ -47,7 +63,7 @@ export default {
   computed: {
     totalPrice() {
       let total = 0;
-      this.items.forEach((el) => total += (el.price * el.quantity))
+      this.items.forEach((el) => total += (el.regular_price.value * el.quantity))
 
       return total;
     }
@@ -83,8 +99,8 @@ span {
 }
 
 .image {
-  height: 7rem;
-  width: 7rem;
+  height: 5rem;
+  width: 5rem;
 }
 
 .name {
@@ -95,14 +111,6 @@ span {
 .price, .number, .item-button, .item-total-price{
   width: 12%;
 }
-
-.total-price {
-  position: absolute;
-  right: 10rem;
-  width: 20rem;
-  margin-top: 3rem;
-}
-
 
 .button {
   padding: 0.5rem 1rem;

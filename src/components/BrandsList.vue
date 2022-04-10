@@ -1,7 +1,7 @@
 <template>
   <div class="brand">
     <ul class="list" id="brandsList">
-      <li v-for="brand in brands" :key="brand.id" @click="underline(brand)">{{ brand.title }}</li>
+      <li v-for="(brand, index) in brands" :key="brand.id" @click="underline(brand, index)">{{ brand.title }}</li>
     </ul>
   </div>
 </template>
@@ -18,14 +18,14 @@ export default {
     }
   },
   methods: {
-    underline(item) {
-      let idx = item.id - 1;
+    underline(brnd, bIndex) {
+      console.log(brnd, bIndex);
       let _brands = document.getElementById("brandsList").getElementsByTagName('li');
       for(let i = 0; i < _brands.length; ++i) {
-        if(i === idx) _brands[i].style.textDecorationLine = 'underline';
+        if(i === bIndex) _brands[i].style.textDecorationLine = 'underline';
         else _brands[i].style.textDecorationLine = 'none';
       }
-      this.$emit('selected-brand', item);
+      this.$emit('selected-brand', brnd);
     }
   }
 }
@@ -36,10 +36,6 @@ export default {
   list-style: none;
   padding-inline-start: 0;
   padding: 0 1rem;
-}
-
-li.active {
-  text-decoration-line: underline;
 }
 
 .brand {

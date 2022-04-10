@@ -4,6 +4,7 @@
       <h1>Shop</h1>
       <p>Lorem ipsum dolor sit amet</p>
       <router-link class="button" to="/store">Enter Shop</router-link>
+      <router-link class="button" to="/load">Load Data</router-link>
     </div>
   </div>
 </template>

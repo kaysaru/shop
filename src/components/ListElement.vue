@@ -5,12 +5,12 @@
       {{ title }}
     </p>
     <p>
-      {{ brand_id }}
+      {{ getBrandNameById(brand_id) }}
     </p>
     <p>
       {{ regular_price.value + " " + regular_price.currency }}
     </p>
-    <button class="button">Add To Cart</button>
+    <button class="button" @click="addToCart">Add To Cart</button>
   </div>
 </template>
 
@@ -35,7 +35,17 @@ export default {
     }
   },
   methods: {
-
+    addToCart() {
+      this.$store.commit('addToCart', this.item);
+    },
+    getBrandNameById(brandId) {
+      for(let i = 0; i < this.$store.state.brands.length; ++i) {
+        if (parseInt(this.$store.state.brands[i].id) === brandId) {
+          return this.$store.state.brands[i].title;
+        }
+      }
+      return 'Unknown Brand';
+    }
   },
   computed: {
     imgPath() {

@@ -2,8 +2,11 @@
   <div>
     <div class="container">
       <h1>Shopping Cart</h1>
-      <BasketTable :initial-items="items" @quantity-change="calculateTotal"/>
-      <div class="total-price"><h1>Subtotal: {{ totalPrice }}</h1></div>
+      <BasketTable @quantity-change="calculateTotal"/>
+      <div class="total-price" v-if="!isNaN(totalPrice) & totalPrice !== 0">
+        <h1>Subtotal: {{ totalPrice.toPrecision(4) }}</h1>
+        <button class="button" @click="alertBuy">Buy</button>
+      </div>
     </div>
   </div>
 </template>
@@ -17,28 +20,15 @@ export default {
   },
   data() {
     return {
-      totalPrice: 0.0,
-      items: [
-        {
-          image: 'https://picsum.photos/200/300',
-          index: 1,
-          name: 'Kaysar',
-          quantity: 2,
-          price: 100
-        },
-        {
-          image: 'https://picsum.photos/200/300',
-          index: 2,
-          name: 'Damir',
-          quantity: 3,
-          price: 50
-        }
-      ]
+      totalPrice: 0.0
     }
   },
   methods: {
     calculateTotal(data) {
       this.totalPrice = data;
+    },
+    alertBuy() {
+      alert(this.totalPrice.toPrecision(4) + ' is taken from your bank account');
     }
   }
 }
@@ -49,5 +39,17 @@ export default {
   margin-top: 3rem;
   padding-right: 3rem;
   text-align: right;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 1px #333 solid;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: #333;
+  color: white;
 }
 </style>

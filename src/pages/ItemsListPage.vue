@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Shopping Cart</h1>
+    <h1>Store</h1>
     <ListElement/>
   </div>
 </template>

@@ -1,11 +1,14 @@
 <template>
   <div class="topnav">
     <img class="image" :src="indexImg" alt="logo">
-    <div class="buttons">
-      <router-link to="/store" style="margin-right: 0.3rem">Store</router-link>
-      <router-link to="/basket">Shopping Cart</router-link>
-    </div>
-
+    <ul class="buttons">
+      <li>
+        <router-link to="/store" :class="{ active: this.store }" @click="changeActive('store')" style="margin-right: 0.3rem">Store</router-link>
+      </li>
+      <li>
+        <router-link to="/basket" :class="{ active: this.basket }" @click="changeActive('basket')">Shopping Cart</router-link>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -14,7 +17,22 @@ export default {
   name: "NavbarTop",
   data() {
     return {
-      indexImg: require('@/assets/pics/logo.png')
+      indexImg: require('@/assets/pics/logo.png'),
+      basket: false,
+      store: true
+    }
+  },
+  methods: {
+    changeActive(active) {
+      console.log(active)
+      if(active === 'store') {
+        this.store = true;
+        this.basket = false;
+      }
+      else {
+        this.store = false
+        this.basket = true;
+      }
     }
   }
 
@@ -26,8 +44,8 @@ export default {
 .topnav {
   background-color: #333;
   overflow: hidden;
-  position: absolute;
   width: 100%;
+  position: relative;
 }
 
 /* Style the links inside the navigation bar */
@@ -47,22 +65,28 @@ export default {
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #04AA6D;
-  color: white;
+  background-color: #ddd;
+  color: black;
+}
+
+li {
+  display: inline;
 }
 
 .buttons {
-  position: absolute;
   right: 1rem;
+  vertical-align: middle;
+  margin: 0;
+  position: absolute;
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 
 .image {
+  float:left;
   height: 3rem;
   width: 3rem;
   padding: 1rem 2rem;
-  vertical-align: middle;
 }
 </style>

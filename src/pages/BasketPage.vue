@@ -1,7 +1,10 @@
 <template>
-  <div class="container">
-    <BasketTable initial-items="items"/>
-    <div class="total-price"><h1>Subtotal: {{ totalPrice }}</h1></div>
+  <div>
+    <div class="container">
+      <h1>Shopping Cart</h1>
+      <BasketTable :initial-items="items" @quantity-change="calculateTotal"/>
+      <div class="total-price"><h1>Subtotal: {{ totalPrice }}</h1></div>
+    </div>
   </div>
 </template>
 
@@ -32,10 +35,19 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    calculateTotal(data) {
+      this.totalPrice = data;
+    }
   }
 }
 </script>
 
 <style scoped>
-
+.total-price {
+  margin-top: 3rem;
+  padding-right: 3rem;
+  text-align: right;
+}
 </style>

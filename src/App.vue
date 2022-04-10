@@ -1,6 +1,7 @@
 <template>
 <!--  <img alt="Vue logo" src="./assets/logo.png">-->
   <NavbarTop/>
+
   <router-view/>
 
 <!--  <ListElement/>-->
@@ -20,33 +21,6 @@ export default {
     // ListElement,
     // BasketTable,
     NavbarTop
-  },
-  data() {
-    return {
-      items: [
-        {
-          image: 'https://picsum.photos/200/300',
-          index: 1,
-          name: 'Kaysar',
-          quantity: 2,
-          price: 100
-        },
-        {
-          image: 'https://picsum.photos/200/300',
-          index: 2,
-          name: 'Damir',
-          quantity: 3,
-          price: 50
-        }
-      ],
-      total: 0.0
-    }
-  },
-  methods: {
-    updateTotal(amount) {
-      console.log(amount);
-      this.total = amount;
-    }
   }
 }
 </script>
@@ -56,15 +30,17 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /*text-align: center;*/
   color: #2c3e50;
 }
 
 body {
-  margin: 0;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .container {
-  margin-top: 1rem;
+  margin: 1rem 2rem;
+  padding: 1rem;
 }
+
 </style>

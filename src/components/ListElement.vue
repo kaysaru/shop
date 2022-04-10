@@ -5,6 +5,9 @@
       {{ title }}
     </p>
     <p>
+      {{ brand_id }}
+    </p>
+    <p>
       {{ regular_price.value + " " + regular_price.currency }}
     </p>
     <button class="button">Add To Cart</button>

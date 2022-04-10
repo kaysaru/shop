@@ -1,6 +1,5 @@
 <template>
   <div class="item">
-    <h1>Shopping Cart</h1>
     <ul class="list">
       <li style="border: none;">
         <span style="width: 7rem"></span>
@@ -11,39 +10,26 @@
         <span class="item-button"> Delete </span>
       </li>
       <li v-for="item in items" :key="item.index">
-        <span> <img class="image" :src="item.image"> </span>
+        <span> <img class="image" :src="item.image" alt="img of item"> </span>
         <span class="name"> {{ item.name }} </span>
         <span class="price"> {{ item.price }}$</span>
-        <span class="number"> <input type="number" v-model="item.quantity" min="1" style="width: 3rem"> </span>
+        <span class="number"> <input type="number" @click="emitTotalPrice" v-model="item.quantity" min="1" style="width: 3rem"> </span>
         <span class="item-total-price"> {{ calculatePriceOfItem(item) }} </span>
         <span class="item-button"> <button @click="deleteItem(item.index)" class="button" name="Delete">Delete</button> </span>
       </li>
     </ul>
-    <div class="total-price"><h1>Subtotal: {{ totalPrice }}</h1></div>
   </div>
 </template>
 
 <script>
 export default {
   name: "BasketTable",
+  props: {
+    initialItems: Object,
+  },
   data() {
     return {
-      items: [
-        {
-          image: 'https://picsum.photos/200/300',
-          index: 1,
-          name: 'Kaysar',
-          quantity: 2,
-          price: 100
-        },
-        {
-          image: 'https://picsum.photos/200/300',
-          index: 2,
-          name: 'Damir',
-          quantity: 3,
-          price: 50
-        }
-      ]
+      items: this.initialItems
     }
   },
   methods: {
@@ -53,6 +39,9 @@ export default {
     },
     calculatePriceOfItem(item) {
       return item.price * item.quantity;
+    },
+    emitTotalPrice() {
+      this.$emit('quantity-change', this.totalPrice);
     }
   },
   computed: {
@@ -117,8 +106,13 @@ span {
 .button {
   padding: 0.5rem 1rem;
   background: white;
-  border: 1px black solid;
+  border: 1px #333 solid;
   text-decoration: none;
+}
+
+.button:hover {
+  background-color: #333;
+  color: white;
 }
 
 </style>

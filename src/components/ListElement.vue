@@ -15,7 +15,7 @@ export default {
   name: "ListElement",
   data() {
     return {
-      imageName: 'https://picsum.photos/200/300',
+      imageName: 'https://picsum.photos/200/200',
       productName: '123',
       brand: 'Kaysar',
       price: 0.0
